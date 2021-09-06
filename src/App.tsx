@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div>Hi</div>
+    <div className="border border-red-500">Hi</div>
   );
 }
 

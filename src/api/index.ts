@@ -28,12 +28,15 @@ interface ReposData {
 
 interface ReposDataItem {
    id: number
+   name: string
    stargazers_count: number
    forks: number
    open_issues: number
+   html_url: string
    owner: {
       login: string
       avatar_url: string
+      html_url: string
    }
 }
 

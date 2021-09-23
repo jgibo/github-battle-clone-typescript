@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const Layout = (props: { children: ReactNode }) => {
    return (
       // main
-      <div className="xl:container mx-auto border border-red-500">
+      <div className="mx-auto border border-red-500" style={{maxWidth: "1200px"}}>
          <nav>
             <Link to="/popular">Popular</Link>
             <Link to="/battle" className="ml-2">

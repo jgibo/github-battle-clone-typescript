@@ -6,7 +6,9 @@ import reportWebVitals from "./reportWebVitals"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { BrowserRouter as Router } from "react-router-dom"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({defaultOptions: {queries: {refetchOnWindowFocus: false}}})
+
+export const numberFormatter = Intl.NumberFormat()
 
 ReactDOM.render(
    <React.StrictMode>

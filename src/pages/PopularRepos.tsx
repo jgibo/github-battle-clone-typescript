@@ -7,6 +7,7 @@ import { StarsIcon } from "../assets/svg/StarsIcon"
 import { IssuesIcon } from "../assets/svg/IssuesIcon"
 import { UsernameIcon } from "../assets/svg/UsernameIcon"
 import clsx from "clsx"
+import { numberFormatter } from ".."
 
 interface RouteParams {
    language: LanguageParam | undefined
@@ -14,9 +15,12 @@ interface RouteParams {
 
 interface RepoCardProps {
    className: string
-   rank: number
+   repoName: string
+   repoUrl: string
    ownerAvatarUrl: string
+   ownerUrl: string
    username: string
+   rank: number
    stars: number
    forks: number
    openIssues: number
@@ -37,9 +41,12 @@ export function PopularRepos() {
       content = data!.items.map((v, i) => (
          <RepoCard
             key={v.id}
-            className="RepoCard"
+            className="RepoCard my-2.5"
             rank={i + 1}
             ownerAvatarUrl={v.owner.avatar_url}
+            ownerUrl={v.owner.html_url}
+            repoName={v.name}
+            repoUrl={v.html_url}
             username={v.owner.login}
             stars={v.stargazers_count}
             forks={v.forks}
@@ -51,7 +58,9 @@ export function PopularRepos() {
    return (
       <div>
          <RepoSelectorNav />
-         <div className="flex flex-wrap">{content}</div>
+         <div className="flex flex-wrap justify-around">
+            {content}
+         </div>
       </div>
    )
 }
@@ -83,35 +92,36 @@ function RepoCard(props: RepoCardProps) {
    return (
       <div
          className={clsx(
-            "flex flex-col items-center justify-center w-1/4 p-6 mr-6 mb-6 bg-gray-200 border border-red-500",
+            "flex flex-col items-center justify-center p-8 bg-gray-200 rounded-md",
             props.className
          )}
-         style={{ width: "250px" }}
+         style={{ width: "290px" }}
       >
-         <span>#{props.rank}</span>
+         <span className="text-2xl mb-3">#{props.rank}</span>
          <img
+            className="mb-3"
             width={120}
             height={120}
             src={props.ownerAvatarUrl}
             alt="Github user profile"
          />
-         <span>{props.username}</span>
-         <div className="self-start">
-            <div className="flex items-center">
+         <a href={props.repoUrl} rel="noreferrer" className="a-medium-bright text-2xl mb-3 text-center">{props.repoName}</a>
+         <div className="self-start text-xl">
+            <div className="flex items-center mb-1.5 font-medium">
                <UsernameIcon />
-               <span className="ml-1">{props.username}</span>
+               <a target="_blank" rel="noreferrer" href={props.ownerUrl} className="a-medium ml-2">{props.username}</a>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mb-1.5">
                <StarsIcon />
-               <span className="ml-1">{props.stars}</span>
+               <span className="ml-2">{numberFormatter.format(props.stars)} stars</span>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mb-1.5">
                <ForksIcon />
-               <span className="ml-1">{props.forks}</span>
+               <span className="ml-2">{numberFormatter.format(props.forks)} forks</span>
             </div>
             <div className="flex items-center">
                <IssuesIcon />
-               <span className="ml-1">{props.openIssues}</span>
+               <span className="ml-2">{numberFormatter.format(props.openIssues)} open issues</span>
             </div>
          </div>
       </div>

@@ -10,4 +10,12 @@
    .a-medium-bright {
       @apply font-medium text-red-700;
    }
+
+   .a-nav-link {
+      @apply a-medium text-lg;
+   }
+
+   .a-nav-link--active {
+      @apply a-medium-bright;
+   }
 }

@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 import { useParams } from "react-router"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { LanguageParam, useReposQuery } from "../api"
 import { ForksIcon } from "../assets/svg/ForksIcon"
 import { StarsIcon } from "../assets/svg/StarsIcon"
@@ -68,22 +68,22 @@ export function PopularRepos() {
 function RepoSelectorNav() {
    return (
       <nav className="flex justify-center">
-         <Link to="/popular">All</Link>
-         <Link to="/popular/JavaScript" className="ml-2">
+         <NavLink to="/popular" className="a-nav-link" activeClassName="a-nav-link--active" exact>All</NavLink>
+         <NavLink to="/popular/JavaScript" className="a-nav-link ml-2" activeClassName="a-nav-link--active">
             JavaScript
-         </Link>
-         <Link to="/popular/Ruby" className="ml-2">
+         </NavLink>
+         <NavLink to="/popular/Ruby" className="a-nav-link ml-2" activeClassName="a-nav-link--active">
             Ruby
-         </Link>
-         <Link to="/popular/Java" className="ml-2">
+         </NavLink>
+         <NavLink to="/popular/Java" className="a-nav-link ml-2" activeClassName="a-nav-link--active">
             Java
-         </Link>
-         <Link to="/popular/CSS" className="ml-2">
+         </NavLink>
+         <NavLink to="/popular/CSS" className="a-nav-link ml-2" activeClassName="a-nav-link--active">
             CSS
-         </Link>
-         <Link to="/popular/Python" className="ml-2">
+         </NavLink>
+         <NavLink to="/popular/Python" className="a-nav-link ml-2" activeClassName="a-nav-link--active">
             Python
-         </Link>
+         </NavLink>
       </nav>
    )
 }

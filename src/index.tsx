@@ -5,8 +5,9 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { BrowserRouter as Router } from "react-router-dom"
+import { ReactQueryDevtools } from "react-query/devtools"
 
-const queryClient = new QueryClient({defaultOptions: {queries: {refetchOnWindowFocus: false}}})
+const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } })
 
 export const numberFormatter = Intl.NumberFormat()
 
@@ -16,6 +17,7 @@ ReactDOM.render(
          <Router>
             <App />
          </Router>
+         <ReactQueryDevtools />
       </QueryClientProvider>
    </React.StrictMode>,
    document.getElementById("root")

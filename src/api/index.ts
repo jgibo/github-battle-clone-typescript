@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useQuery } from "react-query"
+import { useQuery, UseQueryOptions } from "react-query"
 
 const gh = axios.create({
    baseURL: "https://api.github.com",
@@ -12,13 +12,7 @@ const gh = axios.create({
    },
 })
 
-export type LanguageParam =
-   | "All"
-   | "javascript"
-   | "ruby"
-   | "java"
-   | "css"
-   | "python"
+export type LanguageParam = "All" | "javascript" | "ruby" | "java" | "css" | "python"
 
 interface ReposData {
    total_count: number
@@ -40,8 +34,15 @@ interface ReposDataItem {
    }
 }
 
+export interface UserData {
+   avatar_url: string
+   html_url: string
+   followers: number
+   repos_url: string
+}
+
 export function useReposQuery(language: LanguageParam) {
-   return useQuery<ReposData, Error>(`repos-${language}`, async () => {
+   return useQuery<ReposData, Error>(["repos", language], async () => {
       const res = await gh.get(`/search/repositories`, {
          params: {
             q: `stars:>=30 language:${language}`,
@@ -52,4 +53,15 @@ export function useReposQuery(language: LanguageParam) {
       })
       return res.data as ReposData
    })
+}
+
+export function useUserQuery(username: string, options?: UseQueryOptions<UserData, Error>) {
+   return useQuery<UserData, Error>(
+      ["user", username],
+      async () => {
+         const res = await gh.get(`/users/${username}`)
+         return res.data as UserData
+      },
+      options
+   )
 }

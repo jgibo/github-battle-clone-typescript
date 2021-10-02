@@ -19,3 +19,9 @@
       @apply a-medium-bright;
    }
 }
+
+@layer base {
+   .bg-light {
+      @apply bg-gray-200;
+   }
+}

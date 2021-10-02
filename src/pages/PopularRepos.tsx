@@ -8,6 +8,7 @@ import { IssuesIcon } from "../assets/svg/IssuesIcon"
 import { UsernameIcon } from "../assets/svg/UsernameIcon"
 import clsx from "clsx"
 import { numberFormatter } from ".."
+import { Card } from "../components/shared/Card"
 
 interface RouteParams {
    language: LanguageParam | undefined
@@ -58,9 +59,7 @@ export function PopularRepos() {
    return (
       <div>
          <RepoSelectorNav />
-         <div className="flex flex-wrap justify-around">
-            {content}
-         </div>
+         <div className="flex flex-wrap justify-around">{content}</div>
       </div>
    )
 }
@@ -68,7 +67,9 @@ export function PopularRepos() {
 function RepoSelectorNav() {
    return (
       <nav className="flex justify-center">
-         <NavLink to="/popular" className="a-nav-link" activeClassName="a-nav-link--active" exact>All</NavLink>
+         <NavLink to="/popular" className="a-nav-link" activeClassName="a-nav-link--active" exact>
+            All
+         </NavLink>
          <NavLink to="/popular/JavaScript" className="a-nav-link ml-2" activeClassName="a-nav-link--active">
             JavaScript
          </NavLink>
@@ -90,40 +91,34 @@ function RepoSelectorNav() {
 
 function RepoCard(props: RepoCardProps) {
    return (
-      <div
-         className={clsx(
-            "flex flex-col items-center justify-center p-8 bg-gray-200 rounded-md",
-            props.className
-         )}
-         style={{ width: "290px" }}
-      >
-         <span className="text-2xl mb-3">#{props.rank}</span>
-         <img
-            className="mb-3"
-            width={120}
-            height={120}
-            src={props.ownerAvatarUrl}
-            alt="Github user profile"
-         />
-         <a href={props.repoUrl} rel="noreferrer" className="a-medium-bright text-2xl mb-3 text-center">{props.repoName}</a>
-         <div className="self-start text-xl">
-            <div className="flex items-center mb-1.5 font-medium">
-               <UsernameIcon />
-               <a target="_blank" rel="noreferrer" href={props.ownerUrl} className="a-medium ml-2">{props.username}</a>
-            </div>
-            <div className="flex items-center mb-1.5">
-               <StarsIcon />
-               <span className="ml-2">{numberFormatter.format(props.stars)} stars</span>
-            </div>
-            <div className="flex items-center mb-1.5">
-               <ForksIcon />
-               <span className="ml-2">{numberFormatter.format(props.forks)} forks</span>
-            </div>
-            <div className="flex items-center">
-               <IssuesIcon />
-               <span className="ml-2">{numberFormatter.format(props.openIssues)} open issues</span>
+      <Card className={clsx("my-2.5", props.className)}>
+         <div className={clsx("flex flex-col items-center justify-center")}>
+            <span className="text-2xl mb-3">#{props.rank}</span>
+            <img className="mb-3" width={120} height={120} src={props.ownerAvatarUrl} alt="Github user profile" />
+            <a href={props.repoUrl} rel="noreferrer" className="a-medium-bright text-2xl mb-3 text-center">
+               {props.repoName}
+            </a>
+            <div className="self-start text-xl">
+               <div className="flex items-center mb-1.5 font-medium">
+                  <UsernameIcon />
+                  <a target="_blank" rel="noreferrer" href={props.ownerUrl} className="a-medium ml-2">
+                     {props.username}
+                  </a>
+               </div>
+               <div className="flex items-center mb-1.5">
+                  <StarsIcon />
+                  <span className="ml-2">{numberFormatter.format(props.stars)} stars</span>
+               </div>
+               <div className="flex items-center mb-1.5">
+                  <ForksIcon />
+                  <span className="ml-2">{numberFormatter.format(props.forks)} forks</span>
+               </div>
+               <div className="flex items-center">
+                  <IssuesIcon />
+                  <span className="ml-2">{numberFormatter.format(props.openIssues)} open issues</span>
+               </div>
             </div>
          </div>
-      </div>
+      </Card>
    )
 }

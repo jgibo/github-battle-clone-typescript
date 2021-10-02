@@ -3,7 +3,7 @@ export function RedCrossIcon() {
       <svg
          stroke="currentColor"
          fill="currentColor"
-         stroke-width="0"
+         strokeWidth="0"
          viewBox="0 0 512 512"
          color="rgb(194, 57, 42)"
          height="26"

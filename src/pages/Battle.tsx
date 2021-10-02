@@ -4,7 +4,7 @@ import { JetFighterIcon } from "../assets/svg/JetFighterIcon"
 import { TrophyIcon } from "../assets/svg/TrophyIcon"
 import { RedCrossIcon } from "../assets/svg/RedCrossIcon"
 import clsx from "clsx"
-import { useUserQuery } from "../api"
+import { getUserRepos, useUserQuery } from "../api"
 import { useQueryClient } from "react-query"
 import { Link } from "react-router-dom"
 import querystring from "query-string"
@@ -34,8 +34,16 @@ export function Battle() {
    const [playerOneValue, setPlayerOneValue] = useState("")
    const [playerTwoValue, setPlayerTwoValue] = useState("")
    const queryClient = useQueryClient()
-   const playerOneQuery = useUserQuery(playerOneValue, { enabled: false })
-   const playerTwoQuery = useUserQuery(playerTwoValue, { enabled: false })
+   const playerOneQuery = useUserQuery(playerOneValue, {
+      enabled: false,
+      onSuccess: () =>
+         queryClient.prefetchQuery(["user-repos", playerOneValue], async () => getUserRepos(playerOneValue)),
+   })
+   const playerTwoQuery = useUserQuery(playerTwoValue, {
+      enabled: false,
+      onSuccess: () =>
+         queryClient.prefetchQuery(["user-repos", playerTwoValue], async () => getUserRepos(playerTwoValue)),
+   })
 
    const battleReady = !!playerOneQuery.data && !!playerTwoQuery.data
 

@@ -41,6 +41,12 @@ export interface UserData {
    repos_url: string
 }
 
+export interface UserRepoDataItem {
+   stargazers_count: number
+}
+
+export type UserReposData = Array<UserRepoDataItem>
+
 export function useReposQuery(language: LanguageParam) {
    return useQuery<ReposData, Error>(["repos", language], async () => {
       const res = await gh.get(`/search/repositories`, {
@@ -61,6 +67,21 @@ export function useUserQuery(username: string, options?: UseQueryOptions<UserDat
       async () => {
          const res = await gh.get(`/users/${username}`)
          return res.data as UserData
+      },
+      options
+   )
+}
+
+export async function getUserRepos(username: string) {
+   const res = await gh.get(`/users/${username}/repos`)
+   return res.data as UserReposData
+}
+
+export function useUserReposQuery(username: string, options?: UseQueryOptions<UserReposData, Error>) {
+   return useQuery<UserReposData, Error>(
+      ["user-repos", username],
+      async () => {
+         return getUserRepos(username)
       },
       options
    )

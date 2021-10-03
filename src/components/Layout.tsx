@@ -4,9 +4,11 @@ import { NavLink } from "react-router-dom"
 export const Layout = (props: { children: ReactNode }) => {
    return (
       // main
-      <div className="mx-auto border border-red-500" style={{maxWidth: "1200px"}}>
+      <div className="mx-auto" style={{ maxWidth: "1200px" }}>
          <nav>
-            <NavLink to="/popular" className="a-nav-link" activeClassName="a-nav-link--active">Popular</NavLink>
+            <NavLink to="/popular" className="a-nav-link" activeClassName="a-nav-link--active">
+               Popular
+            </NavLink>
             <NavLink to="/battle" className="a-nav-link ml-2" activeClassName="a-nav-link--active">
                Battle
             </NavLink>

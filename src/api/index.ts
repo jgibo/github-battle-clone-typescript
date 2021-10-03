@@ -38,7 +38,11 @@ export interface UserData {
    avatar_url: string
    html_url: string
    followers: number
+   following: number
    repos_url: string
+   public_repos: number
+   name: string
+   location?: string
 }
 
 export interface UserRepoDataItem {

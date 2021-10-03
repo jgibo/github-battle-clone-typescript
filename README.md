@@ -8,3 +8,11 @@ Typescript practice project. Clone of https://github-battle.ui.dev, from the awe
 - tailwindcss
 - react-query
 - react-router 5
+
+## Developer Notes
+### Run
+`npm run start`
+
+### Deploy
+`npm run build`
+`netlify deploy --prod`

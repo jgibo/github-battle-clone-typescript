@@ -15,4 +15,5 @@ Typescript practice project. Clone of https://github-battle.ui.dev, from the awe
 
 ### Deploy
 `npm run build`
+
 `netlify deploy --prod`

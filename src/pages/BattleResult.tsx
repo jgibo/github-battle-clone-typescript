@@ -138,7 +138,7 @@ function BattleResultCard(props: BattleResultCardProps) {
                   <FollowersIcon />
                   <span className="ml-2">{props.followers} followers</span>
                </div>
-               <div className="flex items-center">
+               <div className="flex items-center mb-1.5">
                   <FollowingIcon />
                   <span className="ml-2">{props.following} following</span>
                </div>

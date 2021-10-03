@@ -11,6 +11,7 @@ import { FollowersIcon } from "../assets/svg/FollowersIcon"
 import { FollowingIcon } from "../assets/svg/FollowingIcon"
 import { ReposIcon } from "../assets/svg/ReposIcon"
 import { numberFormatter } from ".."
+import { Link } from "react-router-dom"
 
 const PlayerBattleResult = {
    Winner: "Winner",
@@ -100,7 +101,9 @@ export function BattleResult() {
                />
             </div>
             <div className="flex justify-center mt-16">
-               <button className="w-60 p-2 bg-black text-white">Reset</button>
+               <Link to="/battle" className="w-60 p-2 bg-black text-white text-center">
+                  Reset
+               </Link>
             </div>
          </div>
       )
